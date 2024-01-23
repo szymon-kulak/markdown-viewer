@@ -1,0 +1,149 @@
+$body-color: #282c34;
+$text-color: #fff8f0;
+$preview-color: #15171b;
+$block-background: #aaaaaa18;
+$code-text: #ff9000;
+$heading-color: #6bab90;
+$emphasis-color: #ab2346;
+$link-color: #6610f2;
+
+@mixin heading-preview($size, $decoration: none) {
+	font-size: $size;
+	color: $heading-color;
+	text-decoration: $decoration;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	scrollbar-width: none; // for firefox
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent; /* make scrollbar transparent */
+}
+
+.App {
+	text-align: center;
+	background-color: $body-color;
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	color: $text-color;
+}
+
+#editor {
+	font-family: monospace;
+	background-color: $body-color;
+	color: $text-color;
+	text-align: left;
+	width: 100dvw;
+	height: 40dvh;
+	padding: 20px;
+	resize: none;
+	border: 1px solid $text-color;
+	outline: none;
+}
+
+#preview {
+	font-size: 1.2rem;
+	background-color: $preview-color;
+	text-align: left;
+	height: 60dvh;
+	width: 100dvw;
+	padding: 0 40px;
+	overflow: scroll;
+	h1 {
+		@include heading-preview(3.2rem, underline);
+	}
+	h2 {
+		@include heading-preview(2.4rem, underline);
+	}
+	h3 {
+		@include heading-preview(2rem);
+	}
+	h4 {
+		@include heading-preview(1.6rem);
+	}
+	h5 {
+		@include heading-preview(1.2rem);
+	}
+	h6 {
+		@include heading-preview(0.8rem);
+	}
+	strong,
+	em {
+		color: $emphasis-color;
+	}
+	pre {
+		background-color: $block-background;
+		border-radius: 5px;
+		padding: 10px;
+	}
+	:not(pre) code {
+		background-color: $block-background;
+		border-radius: 5px;
+	}
+	code {
+		font-family: monospace;
+		color: $code-text;
+	}
+	blockquote {
+		font-style: italic;
+		// color: $heading-color;
+		background-color: $block-background;
+		border-radius: 5px;
+		padding: 10px;
+		p {
+			margin: 10px;
+		}
+	}
+	ul,
+	ol {
+		padding: 0 20px;
+		// margin: 0;
+	}
+	a {
+		color: $link-color;
+		// text-decoration: none;
+	}
+	a:visited,
+	a:hover,
+	a:inactive {
+		color: inherit;
+	}
+}
+
+@media (min-width: 800px) {
+	.App {
+		flex-direction: row;
+	}
+	#editor {
+		width: 40dvw;
+		height: 90dvh;
+		margin: auto;
+	}
+	#preview {
+		width: 50dvw;
+		height: 100dvh;
+	}
+}
+
+/* Hide preview when a touchscreen keyboard doesn't leave enough space */
+@media (max-height: 400px) and (max-width: 800px) {
+	#preview {
+		display: none;
+	}
+	#editor {
+		height: 100dvh;
+	}
+}
