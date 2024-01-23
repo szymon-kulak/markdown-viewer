@@ -5,7 +5,7 @@ import { marked } from "marked";
 function App() {
 	const defaultText = `# Hello World!
 
-## Markdown Previewer
+## Markdown Viewer
 
 With Markdown, you can easily make text **bold** or *italic*.
 

@@ -88,6 +88,7 @@ body {
 		background-color: $block-background;
 		border-radius: 5px;
 		padding: 10px;
+		overflow: scroll;
 	}
 	:not(pre) code {
 		background-color: $block-background;
@@ -133,7 +134,7 @@ body {
 		margin: auto;
 	}
 	#preview {
-		width: 50dvw;
+		width: 55dvw;
 		height: 100dvh;
 	}
 }
