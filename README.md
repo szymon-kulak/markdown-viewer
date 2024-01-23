@@ -4,6 +4,8 @@ A simple app I created to make learning Markdown easier.
 
 For those unfamiliar, **Markdown** is a markup language used by [Github](https://github.com/), [Obsidian](https://obsidian.md/), [Discord](https://discord.com/) and many other projects to deliver a consistent text editing experience. It is free and open source, making it ideal for any project.
 
+The app is available on [https://szymon-kulak.github.io/markdown-viewer/](GitHub Pages)
+
 ### Visual Design
 
 I focused on making this app as aesthetically pleasing as possible, designing it with a mobile-first approach, while including a more spacious layout on the desktop:
