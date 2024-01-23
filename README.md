@@ -69,7 +69,7 @@ The colour palette used in the app was created by me to maximise readability and
 
 ### Logic
 
-The app logic was made absolutely trivial thanks to the fine folks who created [Marked](https://github.com/markedjs/marked), a library making it trivial to create markdown previews using JavaScript, so the app is dead simple:
+The app logic was made absolutely trivial thanks to the fine folks who created [Marked](https://github.com/markedjs/marked), a library making it easy to create markdown previews using JavaScript, so the app is dead simple:
 
 #### State
 
