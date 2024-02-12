@@ -1,47 +1,76 @@
-# Markdown Viewer
+# React Markdown Viewer
 
-A simple app I created to make learning Markdown easier.
+A readability-focused Markdown Previewer written in React.
 
-For those unfamiliar, **Markdown** is a markup language used by [Github](https://github.com/), [Obsidian](https://obsidian.md/), [Discord](https://discord.com/) and many other projects to deliver a consistent text editing experience. It is free and open source, making it ideal for any project.
+## 🤔 Why does this exist?
 
-The app is available on [GitHub Pages](https://szymon-kulak.github.io/markdown-viewer/).
+I absolutely love **Markdown**.
+
+For those unfamiliar, **Markdown** is a free and open source markup language used by [Github](https://github.com/), [Obsidian](https://obsidian.md/), [Discord](https://discord.com/) and many other projects to deliver a consistent text editing experience.
+
+However, as a person with ADHD, I struggle reading long documents without colours and differing font sizes to guide my attention. Editing Markdown using tools like _GitHub_ and _VSCode_ simply doesn't cut it for me.
+
+I decided to create a Web App that parses Markdown syntax and returns a clean, visually distinct document that's incredibly easy to read for people with brains like mine.
+
+## 🚀 Quick Start
+
+The app is available at [szymon-kulak.github.io/markdown-viewer/](https://szymon-kulak.github.io/markdown-viewer/).
+
+If you find that you enjoy using the app, a much easier way to access it is installing it as a **Progressive Web App**.
+
+#### 💻 Windows/Linux/Mac
+
+1. On your computer, open Chrome
+2. [Open the App](https://szymon-kulak.github.io/markdown-viewer/)
+3. At the top right of the address bar, click Install
+4. Follow the onscreen instructions to install the PWA
+
+#### 📱 Android
+
+1. On your Android device, open Chrome
+2. Navigate to [szymon-kulak.github.io/markdown-viewer/](https://szymon-kulak.github.io/markdown-viewer/)
+3. Tap Install
+4. Follow the on-screen instructions
+
+#### 🍏 iOS/iPadOS
+
+1. On your iPhone or iPad, open Chrome
+2. Navigate to [szymon-kulak.github.io/markdown-viewer/](https://szymon-kulak.github.io/markdown-viewer/)
+3. At the top right of the address bar, tap Share
+4. Find and tap Add to Home Screen
+5. Tap Add
+
+## 🏃‍♂️ Usage
+
+The app consists of two panels, the editor and the preview.
+
+On mobile, the editor is located below the preview while on the web it is to the left.
+
+Simply type **Markdown** in the editor panel and watch it appear transformed in the preview panel.
+
+```md
+Common Markdown Elements
+
+# Heading
+
+## Smaller Heading
+
+###### Smallest Heading Possible
+
+--- (horizontal line)
+**Bold Text**
+_Italic Text_
+[Link](https://www.google.com/)
+`code`
+```
+
+[Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
 
 ### Visual Design
 
-I focused on making this app as aesthetically pleasing as possible, designing it with a mobile-first approach, while including a more spacious layout on the desktop:
+I focused on making this app as aesthetically pleasing as possible, designing it with a mobile-first approach, while including a more spacious layout on the desktop.
 
-```scss
-@media (min-width: 800px) {
-	.App {
-		flex-direction: row;
-	}
-	#editor {
-		width: 40dvw;
-		height: 90dvh;
-		margin: auto;
-	}
-	#preview {
-		width: 55dvw;
-		height: 100dvh;
-	}
-}
-```
-
-I also made sure that the app is _actually_ usable on mobile by including a query that disables the preview when using a touchscreen keyboard:
-
-```scss
-/* Hide preview when a touchscreen keyboard doesn't leave enough space */
-@media (max-height: 400px) and (max-width: 800px) {
-	#preview {
-		display: none;
-	}
-	#editor {
-		height: 100dvh;
-	}
-}
-```
-
-As with all my apps, I made it easily customisable by including SCSS variables for every colour used throughout the app:
+The colour palette used in the app was created by me to maximise readability and I dare say I'm extremely proud of it, might create a VSCode theme with those colours... 🤔
 
 ```scss
 $body-color: #282c34;
@@ -52,64 +81,6 @@ $code-text: #ff9000;
 $heading-color: #6bab90;
 $emphasis-color: #ab2346;
 $link-color: #6610f2;
-
-#editor {
-	font-family: monospace;
-	background-color: $body-color;
-	color: $text-color;
-	text-align: left;
-	width: 100dvw;
-	height: 40dvh;
-	padding: 20px;
-	resize: none;
-	border: 1px solid $text-color;
-	outline: none;
-}
 ```
-
-The colour palette used in the app was created by me to maximise readability and I dare say I'm extremely proud of it, might create a VSCode theme with those colours... 🤔
-
-### Logic
-
-The app logic was made absolutely trivial thanks to the fine folks who created [Marked](https://github.com/markedjs/marked), a library making it easy to create markdown previews using JavaScript, so the app is dead simple:
-
-#### State
-
-The app uses React, so synchronising the text between the editor and preview is handled by React's state:
-
-```jsx
-const [text, editText] = useState(defaultText);
-
-const textAreaHandler = function (e) {
-	editText(e.target.value);
-};
-
-<textarea id="editor" value={text} onChange={textAreaHandler} />;
-```
-
-Then, said text is parsed by **Marked**:
-
-```jsx
-<div
-	id="preview"
-	dangerouslySetInnerHTML={{
-		__html: marked(text),
-	}}
-/>
-```
-
-I also customised **Marked** to interpret new lines as HTML `<br/>` tags.
-
-```jsx
-marked.setOptions({
-	breaks: true,
-});
-```
-
----
-
-And that's about it!
-
-I hope I have been sufficiently clear in my explanations. This app is freely available to use and customise as you see fit.
 
 If you spotted any errors in the app or the documentation, and/or want to make me a job offer, feel free to reach out at szymon.kulak@proton.me.

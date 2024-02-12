@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./App.scss";
 import { marked } from "marked";
 
@@ -46,6 +46,16 @@ Delete all my text and try it out for yourself!`;
 
 	const [text, editText] = useState(defaultText);
 
+	// prettier-ignore
+	const bottomRef = useRef();
+
+	useEffect(() => {
+		bottomRef.current?.scrollIntoView({
+			behavior: "smooth",
+			block: "end",
+		});
+	}, [text, bottomRef]);
+
 	const textAreaHandler = function (e) {
 		editText(e.target.value);
 	};
@@ -57,12 +67,14 @@ Delete all my text and try it out for yourself!`;
 	return (
 		<div className="App">
 			<textarea id="editor" value={text} onChange={textAreaHandler} />
-			<div
-				id="preview"
-				dangerouslySetInnerHTML={{
-					__html: marked(text),
-				}}
-			/>
+			<div id="preview">
+				<div
+					dangerouslySetInnerHTML={{
+						__html: marked(text),
+					}}
+				></div>
+				<div ref={bottomRef} id="bottomRef" />
+			</div>
 		</div>
 	);
 }
